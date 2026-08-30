@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from catalog.models import Product, Contact, ContactsShop
+from catalog.models import Product, Contact
 
 # Create your views here.
 def home(request):
@@ -24,3 +24,9 @@ def contacts(request):
                             f"Ваше сообщение получено.")
     return render(request, "catalog/contacts.html", {"contacts": contacts_list})
 
+def product_info(request, product_id):
+    try:
+        product = Product.objects.get(id=product_id)
+        return render(request, 'catalog/product_info.html', {'product': product})
+    except Product.DoesNotExist:
+        return render(request, 'catalog/product_info.html')
