@@ -4,7 +4,7 @@ from catalog.models import Product, Contact
 
 # Create your views here.
 def home(request):
-    last_five_products = Product.objects.all().order_by('-created_at')[:5]
+    last_five_products = Product.objects.order_by('-created_at')[:5]
     for product in last_five_products:
         print(f"Продукт: {product.name}, цена: {product.price}")
 

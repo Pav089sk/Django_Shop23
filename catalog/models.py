@@ -1,11 +1,11 @@
 from django.db import models
 
 class Category(models.Model):
-    name = models.CharField(max_length=100, verbose_name='Наименование категории')
-    description = models.CharField(max_length=250, verbose_name='Описание категории')
+    name = models.TextField(max_length=100, verbose_name='Наименование категории')
+    description = models.TextField(max_length=250, verbose_name='Описание категории')
 
     def __str__(self):
-        return f'{self.name}'
+        return self.name
 
     class Meta:
         verbose_name = 'Категория'
