@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-from catalog.models import Product, Contact
+from catalog.models import Product, Contact, ContactsShop
 
 # Create your views here.
 def home(request):
@@ -23,3 +23,4 @@ def contacts(request):
         return HttpResponse(f"Благодарим Вас, {name}! Ваш телефон - {phone}\n"
                             f"Ваше сообщение получено.")
     return render(request, "catalog/contacts.html", {"contacts": contacts_list})
+

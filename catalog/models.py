@@ -41,3 +41,15 @@ class Contact(models.Model):
     def __str__(self):
         return self.name
 
+class ContactsShop(models.Model):
+    country = models.CharField('Страна', max_length=100, default='Россия')
+    inn = models.CharField('ИНН', max_length=20, default='77-1234321')
+    address = models.CharField('Адрес', max_length=200, default='Москва, Якиманка, Ленинский проспект 1А')
+
+    def __str__(self):
+        return self.address
+
+    class Meta:
+        verbose_name = 'Контакт магазина'
+        verbose_name_plural = 'Контакты магазина'
+
