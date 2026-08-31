@@ -7,8 +7,9 @@ def home(request):
     last_five_products = Product.objects.order_by('-created_at')[:5]
     for product in last_five_products:
         print(f"Продукт: {product.name}, цена: {product.price}")
-
-    return render(request, "catalog/home.html")
+    products = Product.objects.all()
+    context = {'products': products}
+    return render(request, 'catalog/home.html', context)
 
 def contacts(request):
     contacts_list = Contact.objects.all()
@@ -30,3 +31,5 @@ def product_info(request, product_id):
         return render(request, 'catalog/product_info.html', {'product': product})
     except Product.DoesNotExist:
         return render(request, 'catalog/product_info.html')
+
+

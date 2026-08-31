@@ -18,7 +18,7 @@
     "fields": {
         "name": "Iphone13",
         "description": "Айфон 13 128GB White",
-        "image": "",
+        "image": "images/media/images/iph13.jpg",
         "category": 1,
         "price": "35999.99",
         "created_at": "2026-08-23",
@@ -29,24 +29,24 @@
     "model": "catalog.product",
     "pk": 3,
     "fields": {
-        "name": "Арбуз",
-        "description": "Арбуз сладкий Краснодар",
-        "image": "",
+        "name": "ASUS ROG Strix",
+        "description": "18 Ноутбук ASUS ROG Strix G835LX-SA034W черный Процессор:\nIntel Core Ultra 9 275HX (8 + 16 x 2.7 ГГц + 2.1 ГГц)\nПамять:\nОЗУ/64 ГБ, SSD/2000 ГБ\nВидеокарта:\nGeForce RTX 5090 для ноутбуков / 24 ГБ",
+        "image": "images/media/images/asus.jpg",
         "category": 2,
-        "price": "109.99",
-        "created_at": "2026-08-23",
-        "updated_at": "2026-08-23T15:53:44.851Z"
+        "price": "503999.99",
+        "created_at": "2026-08-31",
+        "updated_at": "2026-08-31T15:53:44.851Z"
     }
 },
 {
     "model": "catalog.product",
     "pk": 4,
     "fields": {
-        "name": "Черешня",
-        "description": "Черешня спелая",
-        "image": "",
+        "name": "MSI Vector 16",
+        "description": "16 Ноутбук MSI Vector 16 HX AI A2XWHG-623XRU серый Процессор:\nIntel Core Ultra 9 275HX (8 + 16 x 2.7 ГГц + 2.1 ГГц)\nПамять:\nОЗУ/32 ГБ, SSD/1000 ГБ\nВидеокарта:\nGeForce RTX 5070 Ti для ноутбуков / 12 ГБ",
+        "image": "images/media/images/msi.jpg",
         "category": 2,
-        "price": "69.99",
+        "price": "231999.99",
         "created_at": "2026-08-23",
         "updated_at": "2026-08-23T15:17:40.361Z"
     }
@@ -55,26 +55,26 @@
     "model": "catalog.product",
     "pk": 5,
     "fields": {
-        "name": "Томаты",
-        "description": "Томаты розовые",
-        "image": "",
+        "name": "Apple iPad Air (M4)",
+        "description": "11 Планшет Apple iPad Air (M4) 5G 512 ГБ голубой Дисплей:\n2360x1640, IPS, 60 Гц\nОС:\niPadOS 26\nПроцессор:\nApple M4, 8",
+        "image": "images/media/images/ipad.jpg",
         "category": 3,
-        "price": "129.99",
-        "created_at": "2026-08-23",
-        "updated_at": "2026-08-23T15:19:30.361Z"
+        "price": "132999.99",
+        "created_at": "2026-08-31",
+        "updated_at": "2026-08-31T15:19:30.361Z"
     }
 },
     {
     "model": "catalog.product",
     "pk": 6,
     "fields": {
-        "name": "Огурцы",
-        "description": "Огурцы свежие тепличные",
-        "image": "",
+        "name": "HUAWEI MatePad Pro Max ",
+        "description": "13.2 Планшет HUAWEI MatePad Pro Max Wi-Fi 256 ГБ серый + клавиатура + чехол",
+        "image": "images/media/images/huawei.jpg",
         "category": 3,
-        "price": "79.99",
-        "created_at": "2026-08-23",
-        "updated_at": "2026-08-23T15:19:30.211Z"
+        "price": "112999.99",
+        "created_at": "2026-08-21",
+        "updated_at": "2026-08-31T15:19:30.211Z"
     }
 }
 ]
