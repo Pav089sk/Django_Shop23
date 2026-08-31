@@ -1,21 +1,20 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Информация о продукте</title>
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-</head>
-<body class="bg-light">
+{% extends "catalog/base.html" %}
 
-<div class="container py-5" style="max-width: 700px;">
-    <h1 class="mb-4 text-center">Информация о выбранном продукте</h1>
+{% block title %}{{ product.name }} — MyStore{% endblock %}
 
+{% block page_header %}
+<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">Информация о продукте</h1>
+</div>
+{% endblock %}
+
+{% block content %}
+    <a href="{% url 'catalog:home' %}" class="btn btn-sm btn-outline-secondary mb-3">← Вернуться к каталогу</a>
     <div class="card shadow-sm p-4">
         <p class="mb-2"><strong>Название:</strong> {{ product.name }}</p>
         <p class="mb-2"><strong>Описание:</strong> {{ product.description }}</p>
         <p class="mb-2"><strong>Категория:</strong> {{ product.category }}</p>
-        <p class="mb-3"><strong>Цена:</strong> {{ product.price }}</p>
+        <p class="mb-3"><strong>Цена:</strong> {{ product.price }} ₽</p>
 
         {% if product.image %}
             <p class="mb-2"><strong>Фотография:</strong></p>
@@ -26,9 +25,6 @@
 
         <hr class="my-4">
         <p class="small text-muted mb-1">Товар создан: {{ product.created_at }}</p>
-        <p class="small text-muted mb-0">Товар обновлен: {{ product.updated_at }}</p>
+        <p class="small text-muted mb-0">Товар обновлён: {{ product.updated_at }}</p>
     </div>
-</div>
-
-</body>
-</html>
+{% endblock %}

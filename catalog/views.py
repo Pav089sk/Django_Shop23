@@ -25,9 +25,9 @@ def contacts(request):
                             f"Ваше сообщение получено.")
     return render(request, "catalog/contacts.html", {"contacts": contacts_list})
 
-def product_info(request, product_id):
+def product_info(request, pk):
     try:
-        product = Product.objects.get(id=product_id)
+        product = Product.objects.get(id=pk)
         return render(request, 'catalog/product_info.html', {'product': product})
     except Product.DoesNotExist:
         return render(request, 'catalog/product_info.html')

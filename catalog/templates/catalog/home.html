@@ -1,28 +1,6 @@
-<!DOCTYPE html>
-{% load static %}
-<html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>MyStore — Каталог товаров</title>
-    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
-</head>
-<body>
+{% extends "catalog/base.html" %}
 
-<div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom box-shadow">
-    <h5 class="my-0 mr-md-auto font-weight-normal">MyStore</h5>
-    <nav class="ms-5">
-        <a class="p-2 btn btn-outline-primary" href="/">Каталог</a>
-        <a class="p-2 btn btn-outline-primary" href="/contacts/">Контакты</a>
-    </nav>
-</div>
-
-<div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
-    <h1 class="display-4">MyStore</h1>
-    <p class="lead">MyStore — поможем с продажей товаров по всей России и странам СНГ</p>
-</div>
-
-<div class="container">
+{% block content %}
     <div class="row text-center mb-4">
         <div class="col-12">
             <h3>Последние товары</h3>
@@ -42,14 +20,23 @@
                             </div>
                         {% endif %}
                         <div class="card-body d-flex flex-column">
+                            <h5 class="card-title mb-2">
+                                <a href="{% url 'catalog:product_detail' pk=product.pk %}" class="text-decoration-none text-dark">
+                                    {{ product.name }}
+                                </a>
+                            </h5>
                             <h5 class="card-title mb-2">{{ product.name }}</h5>
                             <p class="card-text mb-auto fw-bold text-success">{{ product.price }} ₽</p>
-                            <p class="card-text m-3 fw-light text-secondary">{{ product.description|truncatechars:100 }} </p>
-                            <p class="card-text m-2 fw-light text-secondary">{{ product.created_at }} </p>
-                            <p class="card-text m-2 fw-light text-secondary">{{ product.updated_at }} </p>
+                            <p class="card-text m-3 fw-light text-secondary">{{ product.description|truncatechars:100 }}</p>
+                            <p class="card-text m-2 fw-light text-secondary">{{ product.created_at }}</p>
+                            <p class="card-text m-2 fw-light text-secondary">{{ product.updated_at }}</p>
                             {% if product.category %}
                                 <span class="badge bg-secondary mb-3">{{ product.category.name }}</span>
                             {% endif %}
+                            <div class="d-flex flex-column gap-2">
+                                <a href="{% url 'catalog:product_detail' pk=product.pk %}" class="btn btn-outline-primary">Подробнее</a>
+                                <button type="button" class="btn btn-outline-primary">Купить</button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -60,59 +47,4 @@
             </div>
         {% endif %}
     </div>
-
-    <!-- Блок с ценами (оставил как у тебя, но можно вынести отдельно) -->
-    <div class="row text-center mt-5">
-        <div class="col-3">
-            <div class="card mb-4 shadow-sm border-0">
-                <div class="card-header bg-white">
-                    <h4 class="my-0 fw-normal">Удобный сервис рассылок</h4>
-                </div>
-                <div class="card-body">
-                    <h1 class="card-title pricing-card-title">$140</h1>
-                    <ul class="list-unstyled mt-3 mb-4 text-start m-3">
-                        <li>• Неограниченная лицензия</li>
-                        <li>• Поддержка</li>
-                        <li>• Установка на сервер</li>
-                        <li>• Получение обновлений</li>
-                    </ul>
-                    <button type="button" class="btn btn-lg btn-block btn-outline-primary">Купить</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <footer class="pt-4 my-md-5 pt-md-5 border-top">
-        <div class="row">
-            <div class="col-12 col-md">
-                MyStore
-                <small class="d-block mb-3 text-muted">&copy; 2023</small>
-            </div>
-            <div class="col-6 col-md">
-                <h5>Категории</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Рассылки</a></li>
-                    <li><a class="text-muted" href="#">Телеграм боты</a></li>
-                    <li><a class="text-muted" href="#">Полезные утилиты</a></li>
-                    <li><a class="text-muted" href="#">Веб-приложения</a></li>
-                    <li><a class="text-muted" href="#">Микросервисы</a></li>
-                </ul>
-            </div>
-            <div class="col-6 col-md">
-                <h5>Дополнительно</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="#">Мы пишем</a></li>
-                </ul>
-            </div>
-            <div class="col-6 col-md">
-                <h5>О нас</h5>
-                <ul class="list-unstyled text-small">
-                    <li><a class="text-muted" href="/contacts/">Контакты</a></li>
-                </ul>
-            </div>
-        </div>
-    </footer>
-</div>
-
-</body>
-</html>
+{% endblock %}
