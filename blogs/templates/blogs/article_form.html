@@ -1,0 +1,49 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+
+{% block title %}{% if object %}Редактировать статью{% else %}Новая статья{% endif %}{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-12 col-md-6 mx-auto">
+    <h2>{% if object %}Редактировать{% else %}Создать{% endif %} статью</h2>
+    <hr>
+
+    <form method="post" enctype="multipart/form-data">
+      {% csrf_token %}
+      {{ form.non_field_errors }}
+
+      <div class="mb-3">
+        {{ form.headline.label_tag }}
+        {{ form.headline }}
+        {{ form.headline.errors }}
+      </div>
+
+      <div class="mb-3">
+        {{ form.content.label_tag }}
+        {{ form.content }}
+        {{ form.content.errors }}
+      </div>
+
+      <div class="mb-3">
+        {{ form.preview.label_tag }}
+        {{ form.preview }}
+        {% if form.preview.value %}
+          <img src="{{ form.preview.value.url }}" class="img-fluid mt-2 rounded" alt="Текущий превью">
+        {% endif %}
+        {{ form.preview.errors }}
+      </div>
+
+      <div class="form-check mb-3">
+        {{ form.published }}
+        {{ form.published.label_tag }}
+        {{ form.published.errors }}
+      </div>
+
+      <button type="submit" class="btn btn-primary">
+        {% if object %}Сохранить изменения{% else %}Опубликовать статью{% endif %}
+      </button>
+    </form>
+  </div>
+</div>
+{% endblock %}

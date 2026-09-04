@@ -1,0 +1,19 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+
+{% block title %}Удаление статьи{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-12 col-md-6 mx-auto">
+    <h2>Вы уверены?</h2>
+    <p>Вы собираетесь удалить статью «{{ article.headline }}». Это действие нельзя отменить.</p>
+
+    <form method="post">
+      {% csrf_token %}
+      <button type="submit" class="btn btn-danger">Да, удалить</button>
+      <a href="{% url 'blogs:article_detail' pk=article.pk %}" class="btn btn-secondary">Отмена</a>
+    </form>
+  </div>
+</div>
+{% endblock %}

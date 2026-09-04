@@ -1,0 +1,40 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+
+
+{% block title %}Блог: все статьи{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-12">
+    <h2>Все статьи</h2>
+    <hr>
+
+    {% for article in articles %}
+      <div class="card mb-3">
+        <div class="card-body">
+          <h3 class="card-title">
+            <a href="{% url 'blogs:article_detail' pk=article.pk %}" class="text-decoration-none">
+              {{ article.headline }}
+            </a>
+          </h3>
+          <p class="card-subtitle text-muted">
+            {{ article.created_at|date:"d.m.Y H:i" }} • {{ article.views }} просмотров
+            {% if not article.published %}(черновик){% endif %}
+          </p>
+
+          {% if article.preview %}
+            <img src="{{ article.preview.url }}" class="img-fluid rounded mb-2" alt="{{ article.headline }}">
+          {% endif %}
+
+          <p class="card-text">{{ article.content|truncatechars:120 }}</p>
+        </div>
+      </div>
+    {% empty %}
+      <p>Пока нет статей.</p>
+    {% endfor %}
+
+    <a href="{% url 'blogs:article_form' %}" class="btn btn-primary">Добавить статью</a>
+  </div>
+</div>
+{% endblock %}
