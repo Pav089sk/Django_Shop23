@@ -1,35 +1,34 @@
-from django.shortcuts import render
-from django.http import HttpResponse
 from catalog.models import Product, Contact
-
-# Create your views here.
-def home(request):
-    last_five_products = Product.objects.order_by('-created_at')[:5]
-    for product in last_five_products:
-        print(f"Продукт: {product.name}, цена: {product.price}")
-    products = Product.objects.all()
-    context = {'products': products}
-    return render(request, 'catalog/home.html', context)
-
-def contacts(request):
-    contacts_list = Contact.objects.all()
-
-    if request.method == "POST":
-        name = request.POST.get('name')
-        phone = request.POST.get('phone')
-        message = request.POST.get('message')
-        print(name)
-        print(phone)
-        print(message)
-        return HttpResponse(f"Благодарим Вас, {name}! Ваш телефон - {phone}\n"
-                            f"Ваше сообщение получено.")
-    return render(request, "catalog/contacts.html", {"contacts": contacts_list})
-
-def product_info(request, pk):
-    try:
-        product = Product.objects.get(id=pk)
-        return render(request, 'catalog/product_info.html', {'product': product})
-    except Product.DoesNotExist:
-        return render(request, 'catalog/product_info.html')
+from catalog.forms import ContactForm
+from django.views.generic import  ListView, FormView, DetailView
+from django.urls import reverse_lazy
 
 
+class ProductListView(ListView):
+    model = Product
+    template_name = 'catalog/home.html'
+    context_object_name = 'products'
+
+    def get_queryset(self):
+        return Product.objects.order_by('-created_at')[:5]
+
+
+class ContactView(FormView):
+    form_class = ContactForm
+    template_name = 'catalog/contacts.html'
+    success_url = reverse_lazy('catalog:contacts')
+
+    def form_valid(self, form):
+        form.save()
+        return super().form_valid(form)
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['contacts'] = Contact.objects.all()
+        return context
+
+
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = 'catalog/product_info.html'
+    context_object_name = 'product'
