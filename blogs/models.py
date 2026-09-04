@@ -6,10 +6,10 @@ class Article(models.Model):
     preview = models.ImageField(upload_to='images/', null=True, blank=True, verbose_name='Изображение')
     created_at = models.DateTimeField(auto_now_add=True, verbose_name='Дата создания')
     published = models.BooleanField(default=True)
-    views = models.IntegerField(default=0)
+    views_article = models.IntegerField(default=0)
 
     def __str__(self):
-        return f'{self.headline} {self.created_at} {self.views}'
+        return f'{self.headline} {self.created_at} {self.views_article}'
 
     class Meta:
         verbose_name = 'Статья'
