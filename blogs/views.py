@@ -6,7 +6,7 @@ class ArticleCreateView(CreateView):
     model = Article
     fields = ['headline', 'content', 'preview', 'published']
     template_name = 'blogs/article_form.html'
-    success_url = reverse_lazy('blogs:article-list')
+    success_url = reverse_lazy('blogs:article_list')
 
 class ArticleDetailView(DetailView):
     model = Article
@@ -23,7 +23,6 @@ class ArticleUpdateView(UpdateView):
     model = Article
     fields = ['headline', 'content', 'preview', 'published']
     template_name = 'blogs/article_upd.html'
-    success_url = reverse_lazy('blogs:article-list')
 
     def get_success_url(self):
         return reverse_lazy('blogs:article_detail', kwargs={'pk': self.object.pk})
@@ -39,5 +38,5 @@ class ArticleListView(ListView):
 class ArticleDeleteView(DeleteView):
     model = Article
     template_name = 'blogs/article_confirm_delete.html'
-    success_url = reverse_lazy('blogs:article-list')
+    success_url = reverse_lazy('blogs:article_list')
 

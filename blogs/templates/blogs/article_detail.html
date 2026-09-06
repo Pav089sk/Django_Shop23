@@ -9,7 +9,8 @@
     <h1>{{ article.headline }}</h1>
     <p class="text-muted mb-4">
       {{ article.created_at|date:"d.m.Y H:i" }}
-      {% if article.published %}• Опубликовано{% else %}• Черновик{% endif %}
+      {% if article.published %}• Опубликовано {% else %}• Черновик{% endif %}
+      Количество просмотров: {{ article.views_article }}
     </p>
 
     {% if article.preview %}
