@@ -1,7 +1,21 @@
 from catalog.models import Product, Contact
-from catalog.forms import ContactForm
-from django.views.generic import  ListView, FormView, DetailView
+from catalog.forms import ContactForm, ProductForm
+from django.views.generic import  ListView, FormView, DetailView, CreateView, UpdateView
 from django.urls import reverse_lazy
+
+
+class ProductCreateView(CreateView):
+    model = Product
+    form_class = ProductForm
+    template_name = 'catalog/product_form.html'
+    success_url = reverse_lazy('catalog:home')
+
+
+class ProductUpdateView(UpdateView):
+    model = Product
+    form_class = ProductForm
+    template_name = 'catalog/product_form.html'
+    success_url = reverse_lazy('catalog:home')
 
 
 class ProductListView(ListView):
