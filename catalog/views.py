@@ -1,6 +1,6 @@
 from catalog.models import Product, Contact
 from catalog.forms import ContactForm, ProductForm
-from django.views.generic import  ListView, FormView, DetailView, CreateView, UpdateView
+from django.views.generic import  ListView, FormView, DetailView, CreateView, UpdateView, DeleteView
 from django.urls import reverse_lazy
 
 
@@ -46,3 +46,9 @@ class ProductDetailView(DetailView):
     model = Product
     template_name = 'catalog/product_info.html'
     context_object_name = 'product'
+
+
+class ProductDeleteView(DeleteView):
+    model = Product
+    template_name = 'catalog/product_delete.html'
+    success_url = reverse_lazy('catalog:home')
