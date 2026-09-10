@@ -24,7 +24,7 @@ class ProductListView(ListView):
     context_object_name = 'products'
 
     def get_queryset(self):
-        return Product.objects.order_by('-created_at')[:5]
+        return Product.objects.order_by('-created_at')[:10]
 
 
 class ContactView(FormView):

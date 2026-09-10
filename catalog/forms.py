@@ -9,9 +9,8 @@ class ContactForm(forms.ModelForm):
         fields = ['name', 'phone', 'message']
 
 
-
 class ProductForm(forms.ModelForm):
-    DANGERS_WORDS = ['казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно',
+    FORBIDDEN_WORDS = ['казино', 'криптовалюта', 'крипта', 'биржа', 'дешево', 'бесплатно',
                      'обман', 'полиция', 'радар']
 
     class Meta:
@@ -24,7 +23,7 @@ class ProductForm(forms.ModelForm):
         if not name:
             return name
         low_name = name.lower()
-        for word in self.DANGERS_WORDS:
+        for word in self.FORBIDDEN_WORDS:
             if word in low_name:
                 raise ValidationError (f'Наименование продукта содержит запрещенное слово {word}')
         return name
@@ -34,7 +33,13 @@ class ProductForm(forms.ModelForm):
         if not description:
             return description
         low_desc = description.lower()
-        for word in self.DANGERS_WORDS:
+        for word in self.FORBIDDEN_WORDS:
             if word in low_desc:
                 raise ValidationError (f'В описании продукта содержится запрещенное слово {word}')
         return description
+
+    def clean_price(self):
+        price = self.cleaned_data.get('price')
+        if price is not None and price < 0:
+            raise ValidationError (f'Вы ввели {price}. Цена не может быть отрицательной')
+        return price
