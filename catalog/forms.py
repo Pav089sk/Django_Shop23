@@ -28,7 +28,6 @@ class ProductForm(forms.ModelForm):
         self.fields['description'].widget.attrs.update({
             'class': 'form-control',
             'placeholder': 'Введите описание товара',
-            'rows': 4
         })
 
         self.fields['price'].widget.attrs.update({
