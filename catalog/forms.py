@@ -17,6 +17,36 @@ class ProductForm(forms.ModelForm):
         model = Product
         fields = ['name', 'description', 'image', 'category', 'price']
 
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+
+        self.fields['name'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'Введите наименование товара'
+        })
+
+        self.fields['description'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'Введите описание товара',
+            'rows': 4
+        })
+
+        self.fields['price'].widget.attrs.update({
+            'class': 'form-control',
+            'placeholder': 'Цена товара',
+            'min': '0',
+            'step': '0.01'
+        })
+
+        self.fields['category'].widget.attrs.update({
+            'class': 'form-select'
+        })
+
+        self.fields['image'].widget.attrs.update({
+            'class': 'form-control'
+        })
+
+
     def clean_name(self):
         name = self.cleaned_data.get('name')
 
