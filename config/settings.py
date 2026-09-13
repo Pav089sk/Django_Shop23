@@ -137,7 +137,16 @@ STATICFILES_DIRS = [BASE_DIR / 'static']
 
 MAILERS = {
     "default": {
-        "BACKEND": "django.core.mail.backends.console.EmailBackend",
+        # "BACKEND": "django.core.mail.backends.console.EmailBackend",
+        "BACKEND": 'django.core.mail.backends.smtp.EmailBackend',
+        "OPTIONS": {
+            "host": os.getenv('EMAIL_HOST'),
+            "port": int(os.getenv('EMAIL_PORT', 465)),
+            "use_tls": os.getenv('EMAIL_USE_TLS', 'False').lower() == 'true',
+            "use_ssl": os.getenv('EMAIL_USE_SSL', 'True').lower() == 'true',
+            "username": os.getenv('EMAIL_HOST_USER'),
+            "password": os.getenv('EMAIL_HOST_PASSWORD'),
+        },
     },
 }
 
@@ -149,11 +158,11 @@ AUTH_USER_MODEL = 'users.CustomUser'
 LOGIN_REDIRECT_URL = 'catalog:home'
 LOGOUT_REDIRECT_URL = 'catalog:home'
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = os.getenv('EMAIL_HOST')
-EMAIL_PORT = os.getenv('EMAIL_PORT')
-EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')
-EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL')
-EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = os.getenv('EMAIL_HOST')
+# EMAIL_PORT = os.getenv('EMAIL_PORT')
+# EMAIL_USE_TLS = os.getenv('EMAIL_USE_TLS')
+# EMAIL_USE_SSL = os.getenv('EMAIL_USE_SSL')
+# EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
+# EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL = os.getenv("EMAIL_HOST_USER")
