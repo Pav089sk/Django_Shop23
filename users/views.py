@@ -18,8 +18,6 @@ class RegisterView(CreateView):
         return super().form_valid(form)
 
     def send_welcome_email(self, user_email):
-        print(f"=== ОТПРАВКА ПИСЬМА на {user_email} ===")
-        print(f"From: {settings.DEFAULT_FROM_EMAIL}")
         send_mail(
             subject='Добро пожаловать!',
             message='Спасибо за регистрацию!',
@@ -27,8 +25,6 @@ class RegisterView(CreateView):
             from_email=settings.DEFAULT_FROM_EMAIL,
             fail_silently=False,
         )
-
-    print("=== ПИСЬМО ОТПРАВЛЕНО БЕЗ ОШИБОК ===")
 
 class CustomLoginView(LoginView):
     template_name = 'users/login.html'
