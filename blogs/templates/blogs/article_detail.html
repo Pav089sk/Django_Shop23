@@ -1,0 +1,33 @@
+{% extends 'catalog/base.html' %}
+{% load static %}
+
+{% block title %}{{ article.headline }}{% endblock %}
+
+{% block content %}
+<div class="row">
+  <div class="col-12 col-md-8 mx-auto">
+    <h1>{{ article.headline }}</h1>
+    <p class="text-muted mb-4">
+      {{ article.created_at|date:"d.m.Y H:i" }}
+      {% if article.published %}• Опубликовано {% else %}• Черновик{% endif %}
+      Количество просмотров: {{ article.views_article }}
+    </p>
+
+    {% if article.preview %}
+      <img src="{{ article.preview.url }}" class="img-fluid mb-4 rounded" alt="{{ article.headline }}">
+    {% endif %}
+
+    <div class="content-block">
+      {{ article.content|linebreaks }}
+    </div>
+
+    <hr class="my-4">
+
+    <div class="btn-group">
+      <a href="{% url 'blogs:article_list' %}" class="btn btn-secondary">← Назад к списку</a>
+      <a href="{% url 'blogs:article_update' pk=article.pk %}" class="btn btn-warning">✏️ Редактировать</a>
+      <a href="{% url 'blogs:article_delete' pk=article.pk %}" class="btn btn-danger">🗑️ Удалить</a>
+    </div>
+  </div>
+</div>
+{% endblock %}

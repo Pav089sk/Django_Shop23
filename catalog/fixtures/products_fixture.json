@@ -1,0 +1,80 @@
+[
+{
+    "model": "catalog.product",
+    "pk": 1,
+    "fields": {
+        "name": "Iphone17",
+        "description": "Айфон 17 черный с фото",
+        "image": "images/media/images/iph17.jpg",
+        "category": 1,
+        "price": "75990.00",
+        "created_at": "2026-08-23",
+        "updated_at": "2026-08-23T15:09:38.340Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 2,
+    "fields": {
+        "name": "Iphone13",
+        "description": "Айфон 13 128GB White",
+        "image": "images/media/images/iph13.jpg",
+        "category": 1,
+        "price": "35999.99",
+        "created_at": "2026-08-23",
+        "updated_at": "2026-08-23T15:15:43.556Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 3,
+    "fields": {
+        "name": "ASUS ROG Strix",
+        "description": "18 Ноутбук ASUS ROG Strix G835LX-SA034W черный Процессор:\nIntel Core Ultra 9 275HX (8 + 16 x 2.7 ГГц + 2.1 ГГц)\nПамять:\nОЗУ/64 ГБ, SSD/2000 ГБ\nВидеокарта:\nGeForce RTX 5090 для ноутбуков / 24 ГБ",
+        "image": "images/media/images/asus.jpg",
+        "category": 2,
+        "price": "503999.99",
+        "created_at": "2026-08-31",
+        "updated_at": "2026-08-31T15:53:44.851Z"
+    }
+},
+{
+    "model": "catalog.product",
+    "pk": 4,
+    "fields": {
+        "name": "MSI Vector 16",
+        "description": "16 Ноутбук MSI Vector 16 HX AI A2XWHG-623XRU серый Процессор:\nIntel Core Ultra 9 275HX (8 + 16 x 2.7 ГГц + 2.1 ГГц)\nПамять:\nОЗУ/32 ГБ, SSD/1000 ГБ\nВидеокарта:\nGeForce RTX 5070 Ti для ноутбуков / 12 ГБ",
+        "image": "images/media/images/msi.jpg",
+        "category": 2,
+        "price": "231999.99",
+        "created_at": "2026-08-23",
+        "updated_at": "2026-08-23T15:17:40.361Z"
+    }
+},
+    {
+    "model": "catalog.product",
+    "pk": 5,
+    "fields": {
+        "name": "Apple iPad Air (M4)",
+        "description": "11 Планшет Apple iPad Air (M4) 5G 512 ГБ голубой Дисплей:\n2360x1640, IPS, 60 Гц\nОС:\niPadOS 26\nПроцессор:\nApple M4, 8",
+        "image": "images/media/images/ipad.jpg",
+        "category": 3,
+        "price": "132999.99",
+        "created_at": "2026-08-31",
+        "updated_at": "2026-08-31T15:19:30.361Z"
+    }
+},
+    {
+    "model": "catalog.product",
+    "pk": 6,
+    "fields": {
+        "name": "HUAWEI MatePad Pro Max ",
+        "description": "13.2 Планшет HUAWEI MatePad Pro Max Wi-Fi 256 ГБ серый + клавиатура + чехол",
+        "image": "images/media/images/huawei.jpg",
+        "category": 3,
+        "price": "112999.99",
+        "created_at": "2026-08-21",
+        "updated_at": "2026-08-31T15:19:30.211Z"
+    }
+}
+]
