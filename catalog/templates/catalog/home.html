@@ -1,0 +1,53 @@
+{% extends "catalog/base.html" %}
+
+{% block content %}
+    <div class="row text-center mb-4">
+        <div class="col-12">
+            <h3>Последние товары</h3>
+        </div>
+    </div>
+     <a href="{% url 'catalog:product_create' %}" class="btn btn-primary mb-5">Добавить товар</a>
+    <div class="row">
+        {% if products %}
+            {% for product in products %}
+                <div class="col-6 col-md-4 col-lg-3 mb-4">
+                    <div class="card h-100 shadow-sm border-0">
+                        {% if product.image %}
+                            <img src="{{ product.image.url }}" class="card-img-top" alt="{{ product.name }}" loading="lazy">
+                        {% else %}
+                            <div class="card-img-top bg-light d-flex align-items-center justify-content-center" style="min-height: 200px;">
+                                <span class="text-muted">Нет фото</span>
+                            </div>
+                        {% endif %}
+                        <div class="card-body d-flex flex-column">
+                            <h5 class="card-title mb-2">
+                                <a href="{% url 'catalog:product_detail' pk=product.pk %}" class="text-decoration-none text-dark">
+                                    {{ product.name }}
+                                </a>
+                            </h5>
+                            <p class="card-text mb-auto fw-bold text-success">{{ product.price }} ₽</p>
+                            <p class="card-text m-3 fw-light text-secondary">{{ product.description|truncatechars:100 }}</p>
+                            <p class="card-text m-2 fw-light text-secondary">{{ product.created_at }}</p>
+                            <p class="card-text m-2 fw-light text-secondary">{{ product.updated_at }}</p>
+                            <div class="d-flex gap-2">
+                                <a href="{% url 'catalog:product_update' product.pk %}" class="btn btn-warning btn-sm">Изменить</a>
+                                <a href="{% url 'catalog:product_delete' product.pk %}" class="btn btn-danger btn-sm">Удалить</a>
+                            </div>
+                            {% if product.category %}
+                                <span class="badge bg-secondary mb-3 mt-3">{{ product.category.name }}</span>
+                            {% endif %}
+                            <div class="d-flex flex-column gap-2">
+                                <a href="{% url 'catalog:product_detail' pk=product.pk %}" class="btn btn-outline-primary">Подробнее</a>
+                                <button type="button" class="btn btn-outline-primary">Купить</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <div class="col-12 text-center py-5">
+                <p>Товаров пока нет. Загляните позже!</p>
+            </div>
+        {% endif %}
+    </div>
+{% endblock %}
