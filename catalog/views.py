@@ -1,8 +1,10 @@
 from catalog.models import Product, Contact
 from catalog.forms import ContactForm, ProductForm
-from django.views.generic import  ListView, FormView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import  ListView, FormView, DetailView, CreateView, UpdateView, DeleteView, View
 from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.shortcuts import get_object_or_404, redirect
+from django.http import HttpResponseForbidden
 
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
@@ -25,7 +27,7 @@ class ProductListView(ListView):
     context_object_name = 'products'
 
     def get_queryset(self):
-        return Product.objects.order_by('-created_at')[:10]
+        return Product.objects.filter(publication_status=True).order_by('-created_at')[:10]
 
 
 class ContactView(FormView):
@@ -49,7 +51,19 @@ class ProductDetailView(LoginRequiredMixin, DetailView):
     context_object_name = 'product'
 
 
-class ProductDeleteView(LoginRequiredMixin, DeleteView):
+class ProductDeleteView(LoginRequiredMixin, PermissionRequiredMixin, DeleteView):
     model = Product
     template_name = 'catalog/product_delete.html'
     success_url = reverse_lazy('catalog:home')
+    permission_required = 'catalog.delete_product'
+
+
+class UpdatePublicationStatus(LoginRequiredMixin, View):
+    def post(self, request, pk):
+        product = get_object_or_404(Product, id=pk)
+        if not request.user.has_perm('catalog.can_unpublish_product'):
+            return HttpResponseForbidden('У Вас нет права отменить публикацию продукта')
+
+        product.publication_status = False
+        product.save()
+        return redirect('catalog:home')

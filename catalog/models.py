@@ -24,6 +24,7 @@ class Product(models.Model):
                               default='0.00', verbose_name="Цена")
     created_at = models.DateField(auto_now_add=True, verbose_name='Дата создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата последнего изменения')
+    publication_status = models.BooleanField(default=False, verbose_name = 'Статус публикации')
 
     def __str__(self):
         return f'{self.name} {self.category} {self.price}'
@@ -32,6 +33,8 @@ class Product(models.Model):
         verbose_name = 'Товар'
         verbose_name_plural = 'Товары'
         ordering = ['name']
+        permissions = [('can_unpublish_product', 'Can unpublish product'),
+                       ]
 
 class Contact(models.Model):
     name = models.CharField(max_length=100, verbose_name='Имя')
