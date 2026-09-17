@@ -49,6 +49,7 @@ class ProductForm(forms.ModelForm):
             'class': 'form-check-input'
         })
 
+
     def clean_name(self):
         name = self.cleaned_data.get('name')
 

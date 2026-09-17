@@ -30,11 +30,17 @@
     {% if perms.catalog.can_unpublish_product and product.publication_status %}
           <form action="{% url 'catalog:product_publication' product.pk %}" method="post">
             {% csrf_token %}
-            <button type="submit" class="btn btn-warning">Снять с публикации</button>
+            <button type="submit" class="btn btn-warning mb-3 mt-3">Снять с публикации</button>
           </form>
         {% elif product.publication_status %}
           <span class="badge bg-success">Опубликован</span>
         {% else %}
           <span class="badge bg-secondary">Не опубликован</span>
+    {% endif %}
+    {% if user == product.owner %}
+        <a href="{% url 'catalog:product_update' product.pk %}" class="btn btn-sm btn-outline-primary">Редактировать</a>
+    {% endif %}
+    {% if user == product.owner or perms.catalog.delete_product %}
+        <a href="{% url 'catalog:product_delete' product.pk %}" class="btn btn-sm btn-outline-danger">Удалить</a>
     {% endif %}
 {% endblock %}

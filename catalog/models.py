@@ -1,4 +1,5 @@
 from django.db import models
+from users.models import CustomUser
 
 class Category(models.Model):
     name = models.TextField(max_length=100, verbose_name='Наименование категории')
@@ -25,6 +26,7 @@ class Product(models.Model):
     created_at = models.DateField(auto_now_add=True, verbose_name='Дата создания')
     updated_at = models.DateTimeField(auto_now=True, verbose_name='Дата последнего изменения')
     publication_status = models.BooleanField(default=False, verbose_name = 'Статус публикации')
+    owner = models.ForeignKey(CustomUser,on_delete=models.CASCADE, related_name='products', null=False, blank=False)
 
     def __str__(self):
         return f'{self.name} {self.category} {self.price}'
