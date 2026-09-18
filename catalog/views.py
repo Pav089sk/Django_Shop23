@@ -25,11 +25,14 @@ class ProductUpdateView(LoginRequiredMixin, UpdateView):
     template_name = 'catalog/product_form.html'
     success_url = reverse_lazy('catalog:home')
 
-    def get_object(self, queryset=None):
-        product = super().get_object(queryset)
-        if product.owner != self.request.user:
+    def dispatch(self, request, *args, **kwargs):
+        product = self.get_object()
+        is_owner = product.owner == request.user
+        is_moderator = request.user.has_perm('catalog.change_product')
+
+        if not (is_owner or is_moderator):
             raise PermissionDenied
-        return product
+        return super().dispatch(request, *args, **kwargs)
 
 
 class ProductListView(ListView):

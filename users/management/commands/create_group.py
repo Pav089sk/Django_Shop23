@@ -11,6 +11,7 @@ class Command(BaseCommand):
         ct = ContentType.objects.get_for_model(Product)
         canceled_permission = Permission.objects.get(content_type = ct, codename='can_unpublish_product')
         deleted_permission = Permission.objects.get(content_type = ct, codename='delete_product')
-        editors_group.permissions.add(canceled_permission, deleted_permission)
+        change_permission = Permission.objects.get(content_type = ct, codename='change_product')
+        editors_group.permissions.add(canceled_permission, deleted_permission, change_permission)
         self.stdout.write(self.style.SUCCESS('Created group "moderators"'))
 

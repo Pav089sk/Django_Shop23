@@ -37,7 +37,7 @@
         {% else %}
           <span class="badge bg-secondary">Не опубликован</span>
     {% endif %}
-    {% if user == product.owner %}
+    {% if user == product.owner or perms.catalog.change_product %}
         <a href="{% url 'catalog:product_update' product.pk %}" class="btn btn-sm btn-outline-primary">Редактировать</a>
     {% endif %}
     {% if user == product.owner or perms.catalog.delete_product %}
