@@ -15,7 +15,7 @@ class ProductForm(forms.ModelForm):
 
     class Meta:
         model = Product
-        fields = ['name', 'description', 'image', 'category', 'price']
+        fields = ['name', 'description', 'image', 'category', 'price', 'publication_status']
 
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
@@ -43,6 +43,10 @@ class ProductForm(forms.ModelForm):
 
         self.fields['image'].widget.attrs.update({
             'class': 'form-control'
+        })
+
+        self.fields['publication_status'].widget.attrs.update({
+            'class': 'form-check-input'
         })
 
 
