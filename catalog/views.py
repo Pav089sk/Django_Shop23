@@ -1,13 +1,14 @@
-from catalog.models import Product, Contact, Category
+from catalog.models import Product, Contact
 from catalog.forms import ContactForm, ProductForm
 from django.views.generic import  ListView, FormView, DetailView, CreateView, UpdateView, DeleteView, View
 from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.http import HttpResponseForbidden
 from django.core.exceptions import PermissionDenied
 from django.utils.decorators import method_decorator
 from django.views.decorators.cache import cache_page
+from django.core.cache import cache
 from catalog.services import product_of_category
 
 
@@ -44,7 +45,11 @@ class ProductListView(ListView):
     context_object_name = 'products'
 
     def get_queryset(self):
-        return Product.objects.filter(publication_status=True).order_by('-created_at')[:10]
+        queryset = cache.get('products_queryset')
+        if not queryset:
+            queryset = super().get_queryset()
+            cache.set('products_queryset', queryset, 60 * 5)
+        return queryset
 
 
 class ContactView(FormView):
