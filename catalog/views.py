@@ -2,10 +2,14 @@ from catalog.models import Product, Contact
 from catalog.forms import ContactForm, ProductForm
 from django.views.generic import  ListView, FormView, DetailView, CreateView, UpdateView, DeleteView, View
 from django.urls import reverse_lazy
-from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.shortcuts import get_object_or_404, redirect
 from django.http import HttpResponseForbidden
 from django.core.exceptions import PermissionDenied
+from django.utils.decorators import method_decorator
+from django.views.decorators.cache import cache_page
+from django.core.cache import cache
+from catalog.services import product_of_category
 
 
 class ProductCreateView(LoginRequiredMixin, CreateView):
@@ -58,7 +62,7 @@ class ContactView(FormView):
         context['contacts'] = Contact.objects.all()
         return context
 
-
+@method_decorator(cache_page(60 * 5), name='dispatch')
 class ProductDetailView(LoginRequiredMixin, DetailView):
     model = Product
     template_name = 'catalog/product_info.html'
@@ -88,3 +92,12 @@ class UpdatePublicationStatus(LoginRequiredMixin, View):
         product.publication_status = False
         product.save()
         return redirect('catalog:home')
+
+
+class ProductByCategory(ListView):
+    model = Product
+    template_name = 'catalog/list_products_category.html'
+    context_object_name = 'products_by_cat'
+    paginate_by = 10
+    def get_queryset(self):
+        return product_of_category(category_id=self.kwargs['category_id'])
