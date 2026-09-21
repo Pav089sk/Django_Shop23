@@ -45,11 +45,7 @@ class ProductListView(ListView):
     context_object_name = 'products'
 
     def get_queryset(self):
-        queryset = cache.get('products_queryset')
-        if not queryset:
-            queryset = super().get_queryset()
-            cache.set('products_queryset', queryset, 60 * 5)
-        return queryset
+        return Product.objects.filter(publication_status=True).order_by('-created_at')[:10]
 
 
 class ContactView(FormView):
